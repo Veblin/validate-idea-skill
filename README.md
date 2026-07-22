@@ -1,43 +1,48 @@
-# Validate Idea / 想法拷问（多专家版）
+# Validate Idea (Multi-Expert Adversarial Review)
 
 A Claude Code skill that runs 5 parallel expert agents to stress-test a business/product idea before committing time.
 
-## How it works
+## How It Works
 
 ```
 User describes idea
       │
       ▼
 ┌─ Main Agent ─────────────────────────────────────┐
-│ 1. Gather input (5 questions)                      │
+│ 1. Gather input (5 clarifying questions)           │
 │ 2. Launch 5 experts in parallel                    │
-│ 3. Cross-validate → Verdict                        │
+│ 3. Cross-validate findings → Verdict               │
 └─────────────────────────────────────────────────┘
       │         │         │         │         │
       ▼         ▼         ▼         ▼         ▼
-  🎯 RAT     👂 Mom    🔍 竞品   💰 投资人  🧪 价值主张
-  Hunter    Test      穷举师   质询官   拷问官
+  🎯 RAT     👂 Mom    🔍 Competitor 💰 Investor 🧪 Value Prop
+  Hunter    Test       Exhauster    Inquisitor  Stress Tester
 ```
 
-## 5 Experts
+## The 5 Experts
 
 | Expert | Framework | Focus |
 |--------|-----------|-------|
-| 🎯 RAT Hunter | Riskiest Assumption Test | Find top 3 fatal assumptions + design ≤$100/≤2wk experiments |
-| 👂 Mom Test Interrogator | Rob Fitzpatrick's The Mom Test | Write interview questions that don't mention your product |
-| 🔍 Competitor Exhauster | Exhaustive search | Direct/indirect/alternative/platform/AI — no such thing as no competition |
-| 💰 Investor Inquisitor | Angel investor lens | Painkiller vs vitamin, timing, moat, unit economics, founder fit |
-| 🧪 VP Stress Tester | Value Proposition Design | Jobs-Pains-Gains + 10 critical questions |
+| 🎯 RAT Hunter | Riskiest Assumption Test | Identify top 3 fatal assumptions + design ≤2wk / ≤$100 validation experiments |
+| 👂 Mom Test Interrogator | *The Mom Test* by Rob Fitzpatrick | Write interview questions that probe past behavior, never mentioning your product |
+| 🔍 Competitor Exhauster | Exhaustive multi-layer search | Direct, indirect, alternative, platform risk, AI substitution — no such thing as no competition |
+| 💰 Investor Inquisitor | Angel investor due diligence | Painkiller vs. vitamin, timing, moat dynamics, unit economics, founder-fit |
+| 🧪 Value Prop Stress Tester | *Value Proposition Design* by Osterwalder | Jobs-Pains-Gains breakdown + 10 critical pass/fail questions |
 
 ## Verdicts
 
-- 🟢 **Go** — Highest-risk assumption identified, with a concrete test
-- 🟡 **Narrow** — Cut scope to a specific segment, retest
-- 🔴 **Kill** — Fatal flaw found, don't pursue
+| Verdict | Meaning |
+|:-------:|---------|
+| 🟢 **Pursue** | Highest-risk assumption identified with a concrete validation experiment |
+| 🟡 **Narrow** | Cut scope to a specific segment or feature, then re-test |
+| 🔴 **Kill** | Fatal flaw found — do not pursue this direction |
 
 ## Install
 
-Copy `SKILL.md` to `~/.claude/skills/validate-idea/SKILL.md`
+```bash
+mkdir -p ~/.claude/skills/validate-idea
+cp SKILL.md ~/.claude/skills/validate-idea/SKILL.md
+```
 
 ## Usage
 
@@ -45,12 +50,16 @@ Copy `SKILL.md` to `~/.claude/skills/validate-idea/SKILL.md`
 /validate-idea
 ```
 
-Or describe your idea and Claude will ask clarifying questions before launching the experts.
+Or just describe your idea — Claude will ask clarifying questions before launching the experts.
+
+## Language Support
+
+The skill automatically matches the user's language. Write in Chinese, get responses in Chinese. Write in English, get responses in English.
 
 ## Credits
 
 Inspired by:
-- Riskiest Assumption Test (RAT)
-- Rob Fitzpatrick's *The Mom Test*
-- Alexander Osterwalder's *Value Proposition Design*
-- Angel investing due diligence frameworks
+- **Riskiest Assumption Test (RAT)** — find what kills you fastest
+- **The Mom Test** by Rob Fitzpatrick — how to talk to customers without lying to yourself
+- **Value Proposition Design** by Alexander Osterwalder — Jobs-Pains-Gains framework
+- **Angel investing due diligence** — the questions investors actually ask before writing checks
